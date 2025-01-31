@@ -87,8 +87,8 @@
         display: flex;
         align-items: center;
         gap: 15px;
-        background-color: rgba(255, 255, 255, 0.9);
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        background-color: #333;
+        /* box-shadow: 0 2px 4px rgba(0,0,0,0.05); */
         width: 100%;
         padding: 15px 20px;
       }
@@ -103,8 +103,8 @@
         padding: 6px 12px;
         border: 2px solid #ccc;
         border-radius: 4px;
-        background-color: transparent;
-        color: #666;
+        background-color: goldenrod;
+        color: #000;
         cursor: not-allowed;
         font-size: 0.9rem;
         opacity: 0.7;
@@ -124,7 +124,7 @@
 
       /* Theme colors */
       body.usa-theme {
-        background-color: #f0f2f5; /* Light gray background */
+        background-color: #555; /* Light gray background */
         color: #333; /* Dark gray text */
       }
       .usa-theme.category-button {
@@ -139,7 +139,7 @@
       }
 
       body.brazil-theme {
-        background-color: #ffe9c4; /* Light yellow background */
+        background-color: #ddd; /* Light yellow background */
         color: #002f5f; /* Dark blue text */
       }
       .brazil-theme.category-button {
@@ -226,12 +226,87 @@
         cursor: not-allowed !important;
       }
 
-      /* Update header container background */
-      .header-container {
-        background-color: rgba(255, 255, 255, 0.9);
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        width: 100%;
-        padding: 15px 20px;
+      /* Add these new styles to your existing style section */
+      .category-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+
+      /* .category-weight {
+        font-size: 1rem;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .category-button:hover .category-weight,
+      .category-button:focus .category-weight {
+        opacity: 1;
+      } */
+
+      .category-name {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      @media (min-width: 768px) {
+        .category-name {
+          font-size: 2rem;
+        }
+        .category-weight {
+          font-size: 1.2rem;
+        }
+      }
+
+      /* Add these new styles and update existing ones */
+      .category-weight {
+        position: relative;
+        font-size: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .primary-weight {
+        /* opacity: 1; */
+        /* transition: opacity 0.3s ease; */
+      }
+
+      .secondary-weight {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        transition: all 0.3s ease;
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        white-space: nowrap;
+        pointer-events: none;
+      }
+
+      .category-weight:hover .secondary-weight {
+        opacity: 1;
+        transform: translateX(-50%) translateY(5px);
+      }
+
+      .category-name {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      @media (min-width: 768px) {
+        .category-name {
+          font-size: 2rem;
+        }
+        .category-weight {
+          font-size: 1.2rem;
+        }
       }
 
       /* ...rest of existing styles... */
@@ -239,7 +314,7 @@
   </head>
   <body>
     <div class="header-container">
-      <h1 class="text-start">IBJJF Weight Categories</h1>
+    <h1 class="text-start text-light">IBJJF Weight Categories</h1>
       <div class="flag-container">
         <img
           src="https://flagsapi.com/US/flat/32.png"
@@ -269,27 +344,99 @@
     <script>
       const translations = {
         "en-us": {
-          Rooster: "Rooster",
-          "Light Feather": "Light Feather",
-          Feather: "Feather",
-          Light: "Light",
-          Middle: "Middle",
-          "Medium Heavy": "Medium Heavy",
-          Heavy: "Heavy",
-          "Super Heavy": "Super Heavy",
-          "Ultra Heavy": "Ultra Heavy",
+          Rooster: {
+            name: "Rooster",
+            weightKg: "57.5 kg",
+            weightLbs: "127 lbs"
+          },
+          "Light Feather": {
+            name: "Light Feather",
+            weightKg: "64 kg",
+            weightLbs: "141 lbs"
+          },
+          Feather: {
+            name: "Feather",
+            weightKg: "70 kg",
+            weightLbs: "154 lbs"
+          },
+          Light: {
+            name: "Light",
+            weightKg: "76 kg",
+            weightLbs: "167.5 lbs"
+          },
+          Middle: {
+            name: "Middle",
+            weightKg: "82.3 kg",
+            weightLbs: "181.5 lbs"
+          },
+          "Medium Heavy": {
+            name: "Medium Heavy",
+            weightKg: "88.3 kg",
+            weightLbs: "194.5 lbs"
+          },
+          Heavy: {
+            name: "Heavy",
+            weightKg: "94.3 kg",
+            weightLbs: "208 lbs"
+          },
+          "Super Heavy": {
+            name: "Super Heavy",
+            weightKg: "100.5 kg",
+            weightLbs: "221.5 lbs"
+          },
+          "Ultra Heavy": {
+            name: "Ultra Heavy",
+            weightKg: "> 100.5 kg",
+            weightLbs: "> 221.5 lbs"
+          }
         },
         "pt-br": {
-          Rooster: "Galo",
-          "Light Feather": "Pluma Leve",
-          Feather: "Pluma",
-          Light: "Leve",
-          Middle: "Médio",
-          "Medium Heavy": "Meio-Pesado",
-          Heavy: "Pesado",
-          "Super Heavy": "Super Pesado",
-          "Ultra Heavy": "Pesadíssimo",
-        },
+          Rooster: {
+            name: "Galo",
+            weightKg: "57,5 kg",
+            weightLbs: "127 lbs"
+          },
+          "Light Feather": {
+            name: "Pluma Leve",
+            weightKg: "64 kg",
+            weightLbs: "141 lbs"
+          },
+          Feather: {
+            name: "Pluma",
+            weightKg: "70 kg",
+            weightLbs: "154 lbs"
+          },
+          Light: {
+            name: "Leve",
+            weightKg: "76 kg",
+            weightLbs: "167,5 lbs"
+          },
+          Middle: {
+            name: "Médio",
+            weightKg: "82,3 kg",
+            weightLbs: "181,5 lbs"
+          },
+          "Medium Heavy": {
+            name: "Meio-Pesado",
+            weightKg: "88,3 kg",
+            weightLbs: "194,5 lbs"
+          },
+          Heavy: {
+            name: "Pesado",
+            weightKg: "94,3 kg",
+            weightLbs: "208 lbs"
+          },
+          "Super Heavy": {
+            name: "Super Pesado",
+            weightKg: "100,5 kg",
+            weightLbs: "221,5 lbs"
+          },
+          "Ultra Heavy": {
+            name: "Pesadíssimo",
+            weightKg: "> 100,5 kg",
+            weightLbs: "> 221,5 lbs"
+          }
+        }
       };
 
       const buttons = document.querySelectorAll(".category-button");
@@ -353,24 +500,31 @@
       // Remove the fetch for translations.json and directly load categories
       function loadCategories(lang) {
         categoryButtonsContainer.innerHTML = "";
-
+        const isUSA = document.body.classList.contains('usa-theme');
+        
         const categories = [
-          "Rooster",
-          "Light Feather",
-          "Feather",
-          "Light",
-          "Middle",
-          "Medium Heavy",
-          "Heavy",
-          "Super Heavy",
-          "Ultra Heavy",
+          "Rooster", "Light Feather", "Feather", "Light", "Middle",
+          "Medium Heavy", "Heavy", "Super Heavy", "Ultra Heavy"
         ];
 
         categories.forEach((category) => {
-          const localizedCategory = translations[lang][category];
+          const localizedData = translations[lang][category];
+          const primaryWeight = isUSA ? localizedData.weightLbs : localizedData.weightKg;
+          const secondaryWeight = isUSA ? localizedData.weightKg : localizedData.weightLbs;
+          
           const button = document.createElement("div");
           button.classList.add("col-md-4", "col-sm-6");
-          button.innerHTML = `<button class="category-button" onclick="submitResponse('${category}')" id="${category.toLowerCase()}">${localizedCategory}</button>`;
+          button.innerHTML = `
+            <button class="category-button" onclick="submitResponse('${category}')" id="${category.toLowerCase()}">
+              <div class="category-content">
+                <div class="category-name">${localizedData.name}</div>
+                <div class="category-weight">
+                  <div class="primary-weight">${primaryWeight}</div>
+                  <div class="secondary-weight">${secondaryWeight}</div>
+                </div>
+              </div>
+            </button>
+          `;
           categoryButtonsContainer.appendChild(button);
         });
 
