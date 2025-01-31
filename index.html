@@ -307,21 +307,17 @@
     <script>
       function checkAndRedirectDomain() {
         const currentDomain = window.location.hostname;
-        const currentTheme = localStorage.getItem("theme") || "usa";
-
-        if (
-          currentDomain === "peso.brasileiro.ca" &&
-          currentTheme !== "brazil"
-        ) {
-          window.location.href = "https://weight.brasileiro.ca";
-        } else if (
-          currentDomain === "weight.brasileiro.ca" &&
-          currentTheme === "brazil"
-        ) {
-          window.location.href = "https://peso.brasileiro.ca";
+        const currentTheme = localStorage.getItem("theme");
+        
+        // Only redirect if we have a mismatch between domain and theme
+        if (currentDomain === "peso.brasileiro.ca" && currentTheme === "usa") {
+          window.location.replace("https://weight.brasileiro.ca");
+        } else if (currentDomain === "weight.brasileiro.ca" && currentTheme === "brazil") {
+          window.location.replace("https://peso.brasileiro.ca");
         }
       }
-      document.addEventListener("DOMContentLoaded", checkAndRedirectDomain);
+
+      // Remove the DOMContentLoaded listener since we'll call it after theme is set
     </script>
   </head>
   <body>
@@ -517,6 +513,9 @@
           //   window.location.href = "https://peso.brasileiro.ca";
         }
         localStorage.setItem("theme", theme);
+        
+        // Check domain after theme is set
+        setTimeout(checkAndRedirectDomain, 100); // Small delay to ensure theme is saved
       }
 
       // Remove the fetch for translations.json and directly load categories
