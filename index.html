@@ -1,178 +1,326 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IBJJF Weight Category Survey</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-        }
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+      }
       .category-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            border: none;
-            padding: 10px;
-            height: 150px;
-            width: 100%;
-            text-align: center;
-            background-color: #f0f0f0;
-            border-radius: 10px;
-            margin: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        border: none;
+        padding: 10px;
+        height: 150px;
+        width: 100%;
+        text-align: center;
+        background-color: #f0f0f0;
+        border-radius: 10px;
+        margin: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
 
       .category-button:hover {
-            background-color: #e0e0e0;
-        }
+        background-color: #e0e0e0;
+      }
 
       .disabled {
-            opacity: 0.6;
-            cursor: default;
-            background-color: #ddd;
+        opacity: 0.6;
+        cursor: default;
+        background-color: #ddd;
+      }
+      /* Styles for larger screens (desktop) */
+      @media (min-width: 768px) {
+        .category-button {
+          font-size: 2rem;
         }
-        /* Styles for larger screens (desktop) */
-        @media (min-width: 768px) {
-          .category-button {
-                font-size: 2rem;
-            }
-        }
+      }
 
-        .flag-container {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            display: flex;
-        }
+      .flag-container {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        display: flex;
+      }
       .flag {
-            width: 30px;
-            height: 20px;
-            margin: 0 5px; /* Space between flags */
-            cursor: pointer;
-            border: 1px solid transparent; /* Add a transparent border */
-            transition: border-color 0.3s; /* Smooth border transition */
-        }
+        width: 30px;
+        height: 20px;
+        margin: 0 5px; /* Space between flags */
+        cursor: pointer;
+        border: 1px solid transparent; /* Add a transparent border */
+        transition: border-color 0.3s; /* Smooth border transition */
+      }
 
       .flag:hover {
-            border-color: #ccc; /* Show border on hover */
-        }
+        border-color: #ccc; /* Show border on hover */
+      }
 
-
-        /* Theme colors */
-        body.usa-theme {
-            background-color: #f0f2f5; /* Light gray background */
-            color: #333; /* Dark gray text */
-        }
+      /* Theme colors */
+      body.usa-theme {
+        background-color: #f0f2f5; /* Light gray background */
+        color: #333; /* Dark gray text */
+      }
       .usa-theme.category-button {
-          background-color: #fff;
-          color: #333;
-        }
+        background-color: #fff;
+        color: #333;
+      }
       .usa-theme.category-button:hover {
-          background-color: #eee;
-        }
+        background-color: #eee;
+      }
       .usa-theme.disabled {
-          background-color: #ddd;
-        }
+        background-color: #ddd;
+      }
 
-        body.brazil-theme {
-            background-color: #ffe9c4; /* Light yellow background */
-            color: #002f5f; /* Dark blue text */
-        }
+      body.brazil-theme {
+        background-color: #ffe9c4; /* Light yellow background */
+        color: #002f5f; /* Dark blue text */
+      }
       .brazil-theme.category-button {
-          background-color: #009c3b; /* Green */
-          color: #ffe9c4; /* Yellow */
-        }
+        background-color: #009c3b; /* Green */
+        color: #ffe9c4; /* Yellow */
+      }
       .brazil-theme.category-button:hover {
-          background-color: #00852c; /* Darker green */
-        }
+        background-color: #00852c; /* Darker green */
+      }
       .brazil-theme.disabled {
-          background-color: #c0c0c0; /* Light gray */
-          color: #888;
-        }
+        background-color: #c0c0c0; /* Light gray */
+        color: #888;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="flag-container">
-        <img src="https://flagsapi.com/US/flat/32.png" alt="USA Flag" class="flag" onclick="setTheme('usa')" id="usa-flag">
-        <img src="https://flagsapi.com/BR/flat/32.png" alt="Brazil Flag" class="flag" onclick="setTheme('brazil')" id="brazil-flag">
+      <img
+        src="https://flagsapi.com/US/flat/32.png"
+        alt="USA Flag"
+        class="flag"
+        onclick="setTheme('usa')"
+        id="usa-flag"
+      />
+      <img
+        src="https://flagsapi.com/BR/flat/32.png"
+        alt="Brazil Flag"
+        class="flag"
+        onclick="setTheme('brazil')"
+        id="brazil-flag"
+      />
     </div>
     <div class="container-fluid h-100">
-        <div class="row h-100 justify-content-center align-items-center">
-            <div class="col-md-4 col-sm-6"><button class="category-button" onclick="submitResponse('Rooster')" id="rooster">Rooster</button></div>
-            <div class="col-md-4 col-sm-6"><button class="category-button" onclick="submitResponse('Light Feather')" id="light-feather">Light Feather</button></div>
-            <div class="col-md-4 col-sm-6"><button class="category-button" onclick="submitResponse('Feather')" id="feather">Feather</button></div>
-            <div class="col-md-4 col-sm-6"><button class="category-button" onclick="submitResponse('Light')" id="light">Light</button></div>
-            <div class="col-md-4 col-sm-6"><button class="category-button" onclick="submitResponse('Middle')" id="middle">Middle</button></div>
-            <div class="col-md-4 col-sm-6"><button class="category-button" onclick="submitResponse('Medium Heavy')" id="medium-heavy">Medium Heavy</button></div>
-            <div class="col-md-4 col-sm-6"><button class="category-button" onclick="submitResponse('Heavy')" id="heavy">Heavy</button></div>
-            <div class="col-md-4 col-sm-6"><button class="category-button" onclick="submitResponse('Super Heavy')" id="super-heavy">Super Heavy</button></div>
-            <div class="col-md-4 col-sm-6"><button class="category-button" onclick="submitResponse('Ultra Heavy')" id="ultra-heavy">Ultra Heavy</button></div>
+      <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-md-4 col-sm-6">
+          <button
+            class="category-button"
+            onclick="submitResponse('Rooster')"
+            id="rooster"
+          >
+            Rooster
+          </button>
         </div>
+        <div class="col-md-4 col-sm-6">
+          <button
+            class="category-button"
+            onclick="submitResponse('Light Feather')"
+            id="light-feather"
+          >
+            Light Feather
+          </button>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <button
+            class="category-button"
+            onclick="submitResponse('Feather')"
+            id="feather"
+          >
+            Feather
+          </button>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <button
+            class="category-button"
+            onclick="submitResponse('Light')"
+            id="light"
+          >
+            Light
+          </button>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <button
+            class="category-button"
+            onclick="submitResponse('Middle')"
+            id="middle"
+          >
+            Middle
+          </button>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <button
+            class="category-button"
+            onclick="submitResponse('Medium Heavy')"
+            id="medium-heavy"
+          >
+            Medium Heavy
+          </button>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <button
+            class="category-button"
+            onclick="submitResponse('Heavy')"
+            id="heavy"
+          >
+            Heavy
+          </button>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <button
+            class="category-button"
+            onclick="submitResponse('Super Heavy')"
+            id="super-heavy"
+          >
+            Super Heavy
+          </button>
+        </div>
+        <div class="col-md-4 col-sm-6">
+          <button
+            class="category-button"
+            onclick="submitResponse('Ultra Heavy')"
+            id="ultra-heavy"
+          >
+            Ultra Heavy
+          </button>
+        </div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        const buttons = document.querySelectorAll('.category-button');
-        const votedCategory = localStorage.getItem('votedCategory');
+      const buttons = document.querySelectorAll(".category-button");
+      const votedCategory = localStorage.getItem("votedCategory");
+      const categoryButtonsContainer = document.getElementById(
+        "category-buttons-container"
+      );
+      let translations = {}; // Store translations
+      if (votedCategory) {
+        disableAllButtons();
+        alert("You have already voted for: " + votedCategory);
+      }
 
-        if (votedCategory) {
+      async function submitResponse(category) {
+        if (votedCategory) return;
+
+        try {
+          const response = await fetch("/submit", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ category }), // Send only the category
+          });
+
+          const data = await response.json();
+          if (response.ok) {
+            localStorage.setItem("votedCategory", category);
             disableAllButtons();
-            alert("You have already voted for: " + votedCategory);
+            alert(data.message);
+            // No need to fetch results here anymore
+          } else {
+            alert(data.error);
+          }
+        } catch (error) {
+          console.error("Error submitting response:", error);
+          alert("An error occurred. Please try again later.");
         }
+      }
 
-        async function submitResponse(category) {
-            if (votedCategory) return;
+      function disableAllButtons() {
+        buttons.forEach((button) => {
+          button.classList.add("disabled");
+          button.disabled = true;
+        });
+      }
 
-            try {
-                const response = await fetch('/submit', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ category }), // Send only the category
-                });
-
-                const data = await response.json();
-                if (response.ok) {
-                    localStorage.setItem('votedCategory', category);
-                    disableAllButtons();
-                    alert(data.message);
-                    // No need to fetch results here anymore
-                } else {
-                    alert(data.error);
-                }
-            } catch (error) {
-                console.error('Error submitting response:', error);
-                alert('An error occurred. Please try again later.');
-            }
-        }
-
-        function disableAllButtons() {
-            buttons.forEach(button => {
-                button.classList.add('disabled');
-                button.disabled = true;
-            });
-        }
-
-
-        function setTheme(theme) {
-            document.body.classList.remove('usa-theme', 'brazil-theme'); // Remove existing themes
-            document.body.classList.add(theme + '-theme'); // Add the selected theme
-            localStorage.setItem('theme', theme); // Store the selected theme in local storage
-        }
-
-        // Load theme from local storage on page load
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            setTheme(savedTheme);
+      function setTheme(theme) {
+        if (theme === "usa") {
+          document.body.classList.remove("brazil-theme"); // Remove existing themes
+          document.body.classList.add(theme + "-theme"); // Add the selected theme
+          setLanguage("en-us"); // Set language to English
+          // document.getElementById('usa-flag').style.border = '1px solid #ccc'; // Highlight the selected flag
+          // document.getElementById('brazil-flag').style.border = 'none'; // Remove border from the other flag
         } else {
-          setTheme('usa'); // Default theme
+            document.body.classList.remove("usa-theme"); // Remove existing themes
+            document.body.classList.add(theme + "-theme"); // Add the selected theme
+            setLanguage("pt-br"); // Set language to Portuguese
+          // document.getElementById('brazil-flag').style.border = '1px solid #ccc'; // Highlight the selected flag
+          // document.getElementById('usa-flag').style.border = 'none'; // Remove border from the other flag
         }
+        localStorage.setItem("theme", theme); // Store the selected theme in local storage
+      }
+
+      // Load theme from local storage on page load
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) {
+        setTheme(savedTheme);
+      } else {
+        setTheme("usa"); // Default theme
+      }
+
+      // Fetch translations JSON
+      fetch("translations.json") // Create a JSON file named translations.json
+        .then((response) => response.json())
+        .then((data) => {
+          translations = data;
+          loadCategories("en-us"); // Load initial categories (default to English)
+        });
+
+      function loadCategories(lang) {
+        categoryButtonsContainer.innerHTML = ""; // Clear existing buttons
+
+        const categories = [
+          "Rooster",
+          "Light Feather",
+          "Feather",
+          "Light",
+          "Middle",
+          "Medium Heavy",
+          "Heavy",
+          "Super Heavy",
+          "Ultra Heavy",
+        ];
+
+        categories.forEach((category) => {
+          const localizedCategory = translations[lang][category] || category; // Use translation or fallback to English
+          const button = document.createElement("div");
+          button.classList.add("col-md-4", "col-sm-6"); // Keep the grid classes
+          button.innerHTML = `<button class="category-button" onclick="submitResponse('${category}')" id="${category.toLowerCase()}">${localizedCategory}</button>`;
+          categoryButtonsContainer.appendChild(button);
+        });
+
+        // Check if a vote exists (after creating buttons with potentially new labels)
+        const votedCategory = localStorage.getItem("votedCategory");
+        if (votedCategory) {
+          disableAllButtons();
+        }
+      }
+
+      function setLanguage(lang) {
+        localStorage.setItem("language", lang); // Save selected language
+        loadCategories(lang); // Reload buttons with the new language
+        setTheme(lang); // Set the theme based on the language
+      }
+
+      // Load language from local storage or default to English
+      const savedLang = localStorage.getItem("language") || "en-us";
+      setLanguage(savedLang);
     </script>
-</body>
+  </body>
 </html>

@@ -1,0 +1,24 @@
+{
+    "en-us": {
+        "Rooster": "Rooster",
+        "Light Feather": "Light Feather",
+        "Feather": "Feather",
+        "Light": "Light",
+        "Middle": "Middle",
+        "Medium Heavy": "Medium Heavy",
+        "Heavy": "Heavy",
+        "Super Heavy": "Super Heavy",
+        "Ultra Heavy": "Ultra Heavy"
+    },
+    "pt-br": {
+        "Rooster": "Galo",
+        "Light Feather": "Pluma",
+        "Feather": "Pena",
+        "Light": "Leve",
+        "Middle": "Médio",
+        "Medium Heavy": "Meio Pesado",
+        "Heavy": "Pesado",
+        "Super Heavy": "Super Pesado",
+        "Ultra Heavy": "Ultra Pesado"
+    }
+}
