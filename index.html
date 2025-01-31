@@ -33,18 +33,18 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
       }
 
-      /* USA theme gradients */
-      body.usa-theme .col-md-4:nth-child(3n + 1) .category-button {
+      /* Canada theme gradients */
+      body.canada-theme .col-md-4:nth-child(3n + 1) .category-button {
         background: linear-gradient(135deg, #e0162b 0%, #ffffff 100%);
         color: white;
       }
 
-      body.usa-theme .col-md-4:nth-child(3n + 2) .category-button {
+      body.canada-theme .col-md-4:nth-child(3n + 2) .category-button {
         background: linear-gradient(135deg, #041e42 0%, #ffffff 100%);
         color: white;
       }
 
-      body.usa-theme .col-md-4:nth-child(3n + 3) .category-button {
+      body.canada-theme .col-md-4:nth-child(3n + 3) .category-button {
         background: linear-gradient(135deg, #ffffff 0%, #e0162b 100%);
         color: #041e42;
       }
@@ -123,18 +123,18 @@
       }
 
       /* Theme colors */
-      body.usa-theme {
+      body.canada-theme {
         background-color: #555; /* Light gray background */
         color: #333; /* Dark gray text */
       }
-      .usa-theme.category-button {
+      .canada-theme.category-button {
         background-color: #fff;
         color: #333;
       }
-      .usa-theme.category-button:hover {
+      .canada-theme.category-button:hover {
         background-color: #eee;
       }
-      .usa-theme.disabled {
+      .canada-theme.disabled {
         background-color: #ddd;
       }
 
@@ -159,7 +159,7 @@
         background-color: #f8f9fa; /* Neutral light gray background */
       }
 
-      body.usa-theme {
+      body.canada-theme {
         color: #333;
       }
 
@@ -174,18 +174,18 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
       }
 
-      /* USA theme gradients */
-      .usa-theme .category-button:nth-child(3n + 1) button {
+      /* Canada theme gradients */
+      .canada-theme .category-button:nth-child(3n + 1) button {
         background: linear-gradient(135deg, #e0162b, #fff);
         color: #fff;
       }
 
-      .usa-theme .category-button:nth-child(3n + 2) button {
+      .canada-theme .category-button:nth-child(3n + 2) button {
         background: linear-gradient(135deg, #041e42, #fff);
         color: #fff;
       }
 
-      .usa-theme .category-button:nth-child(3n + 3) button {
+      .canada-theme .category-button:nth-child(3n + 3) button {
         background: linear-gradient(135deg, #fff, #e0162b);
         color: #333;
       }
@@ -207,7 +207,7 @@
       }
 
       /* Hover states */
-      .usa-theme .category-button button:hover {
+      .canada-theme .category-button button:hover {
         opacity: 0.9;
         transform: translateY(-2px);
         transition: all 0.3s ease;
@@ -310,7 +310,7 @@
         const currentTheme = localStorage.getItem("theme");
 
         // Only redirect if we have a mismatch between domain and theme
-        if (currentDomain === "peso.brasileiro.ca" && currentTheme === "usa") {
+        if (currentDomain === "peso.brasileiro.ca" && currentTheme === "canada") {
           window.location.replace("https://weight.brasileiro.ca");
         } else if (currentDomain === "weight.brasileiro.ca" && currentTheme === "brazil") {
           window.location.replace("https://peso.brasileiro.ca");
@@ -323,14 +323,14 @@
 
         // Only set theme and redirect if the theme is different from the current theme
         if (theme !== currentTheme) {
-          if (theme === "usa") {
+          if (theme === "canada") {
             document.body.classList.remove("brazil-theme");
             document.body.classList.add(theme + "-theme");
-            setLanguage("en-us");
+            setLanguage("en-ca");
             document.getElementById("title_weight_categories").innerText =
               "IBJJF Weight Categories";
           } else {
-            document.body.classList.remove("usa-theme");
+            document.body.classList.remove("canada-theme");
             document.body.classList.add(theme + "-theme");
             setLanguage("pt-br");
             document.getElementById("title_weight_categories").innerText =
@@ -345,10 +345,10 @@
 
       // Initial theme and language setup
       document.addEventListener("DOMContentLoaded", () => {
-        const savedTheme = localStorage.getItem("theme") || "usa";
+        const savedTheme = localStorage.getItem("theme") || "canada";
         setTheme(savedTheme);
 
-        const savedLang = localStorage.getItem("language") || "en-us";
+        const savedLang = localStorage.getItem("language") || "en-ca";
         setLanguage(savedLang);
       });
     </script>
@@ -359,12 +359,13 @@
         IBJJF Weight Categories
       </h1>
       <div class="flag-container">
+        <!-- Change the flag source and alt text to CA -->
         <img
           src="https://flagsapi.com/CA/flat/32.png"
           alt="CA Flag"
           class="flag"
-          onclick="setTheme('usa')"
-          id="usa-flag"
+          onclick="setTheme('canada')"
+          id="canada-flag"
         />
         <img
           src="https://flagsapi.com/BR/flat/32.png"
@@ -386,7 +387,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
       const translations = {
-        "en-us": {
+        "en-ca": {
           Rooster: {
             name: "Rooster",
             weightKg: "57.5 kg",
@@ -530,7 +531,7 @@
       // Remove the fetch for translations.json and directly load categories
       function loadCategories(lang) {
         categoryButtonsContainer.innerHTML = "";
-        const isUSA = document.body.classList.contains("usa-theme");
+        const isCanada = document.body.classList.contains("canada-theme");
 
         const categories = [
           "Rooster",
@@ -546,10 +547,10 @@
 
         categories.forEach((category) => {
           const localizedData = translations[lang][category];
-          const primaryWeight = isUSA
+          const primaryWeight = isCanada
             ? localizedData.weightLbs
             : localizedData.weightKg;
-          const secondaryWeight = isUSA
+          const secondaryWeight = isCanada
             ? localizedData.weightKg
             : localizedData.weightLbs;
 
@@ -583,10 +584,10 @@
       if (savedTheme) {
         setTheme(savedTheme);
       } else {
-        setTheme("usa");
+        setTheme("canada");
       }
 
-      const savedLang = localStorage.getItem("language") || "en-us";
+      const savedLang = localStorage.getItem("language") || "en-ca";
       setLanguage(savedLang);
     </script>
   </body>
