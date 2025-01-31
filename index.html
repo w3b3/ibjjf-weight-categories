@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBJJF Weight Category Survey</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+      .category-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            border: none;
+            padding: 10px;
+            height: 150px;
+            width: 100%;
+            text-align: center;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            margin: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+      .category-button:hover {
+            background-color: #e0e0e0;
+        }
+
+      .disabled {
+            opacity: 0.6;
+            cursor: default;
+            background-color: #ddd;
+        }
+        /* Styles for larger screens (desktop) */
+        @media (min-width: 768px) {
+          .category-button {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-md-4 col-sm-6"><button class="category-button" onclick="submitResponse('Rooster')" id="rooster">Rooster</button></div>
+            <div class="col-md-4 col-sm-6"><button class="category-button" onclick="submitResponse('Light Feather')" id="light-feather">Light Feather</button></div>
+            <div class="col-md-4 col-sm-6"><button class="category-button" onclick="submitResponse('Feather')" id="feather">Feather</button></div>
+            <div class="col-md-4 col-sm-6"><button class="category-button" onclick="submitResponse('Light')" id="light">Light</button></div>
+            <div class="col-md-4 col-sm-6"><button class="category-button" onclick="submitResponse('Middle')" id="middle">Middle</button></div>
+            <div class="col-md-4 col-sm-6"><button class="category-button" onclick="submitResponse('Medium Heavy')" id="medium-heavy">Medium Heavy</button></div>
+            <div class="col-md-4 col-sm-6"><button class="category-button" onclick="submitResponse('Heavy')" id="heavy">Heavy</button></div>
+            <div class="col-md-4 col-sm-6"><button class="category-button" onclick="submitResponse('Super Heavy')" id="super-heavy">Super Heavy</button></div>
+            <div class="col-md-4 col-sm-6"><button class="category-button" onclick="submitResponse('Ultra Heavy')" id="ultra-heavy">Ultra Heavy</button></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const buttons = document.querySelectorAll('.category-button');
+        const votedCategory = localStorage.getItem('votedCategory');
+
+        if (votedCategory) {
+            disableAllButtons();
+            alert("You have already voted for: " + votedCategory);
+        }
+
+        async function submitResponse(category) {
+            if (votedCategory) return;
+
+            try {
+                const response = await fetch('/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ category }), // Send only the category
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    localStorage.setItem('votedCategory', category);
+                    disableAllButtons();
+                    alert(data.message);
+                    // No need to fetch results here anymore
+                } else {
+                    alert(data.error);
+                }
+            } catch (error) {
+                console.error('Error submitting response:', error);
+                alert('An error occurred. Please try again later.');
+            }
+        }
+
+        function disableAllButtons() {
+            buttons.forEach(button => {
+                button.classList.add('disabled');
+                button.disabled = true;
+            });
+        }
+
+    </script>
+</body>
+</html>
