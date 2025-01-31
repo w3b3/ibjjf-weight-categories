@@ -305,6 +305,22 @@
       }
     </style>
     <script>
+      function checkAndRedirectDomain() {
+        const currentDomain = window.location.hostname;
+        const currentTheme = localStorage.getItem("theme") || "usa";
+
+        if (
+          currentDomain === "peso.brasileiro.ca" &&
+          currentTheme !== "brazil"
+        ) {
+          window.location.href = "https://weight.brasileiro.ca";
+        } else if (
+          currentDomain === "weight.brasileiro.ca" &&
+          currentTheme === "brazil"
+        ) {
+          window.location.href = "https://peso.brasileiro.ca";
+        }
+      }
       document.addEventListener("DOMContentLoaded", checkAndRedirectDomain);
     </script>
   </head>
@@ -490,7 +506,7 @@
           //   find the element with ID title_weight_categories and set the title based on the language
           document.getElementById("title_weight_categories").innerText =
             "IBJJF Weight Categories";
-        //   window.location.href = "https://weight.brasileiro.ca";
+          //   window.location.href = "https://weight.brasileiro.ca";
         } else {
           document.body.classList.remove("usa-theme");
           document.body.classList.add(theme + "-theme");
@@ -498,7 +514,7 @@
           //   find the element with ID title_weight_categories and set the title based on the language
           document.getElementById("title_weight_categories").innerText =
             "Categorias de Peso CBJJ";
-        //   window.location.href = "https://peso.brasileiro.ca";
+          //   window.location.href = "https://peso.brasileiro.ca";
         }
         localStorage.setItem("theme", theme);
       }
@@ -560,23 +576,6 @@
         setTheme(savedTheme);
       } else {
         setTheme("usa");
-      }
-
-      function checkAndRedirectDomain() {
-        const currentDomain = window.location.hostname;
-        const currentTheme = localStorage.getItem("theme") || "usa";
-
-        if (
-          currentDomain === "peso.brasileiro.ca" &&
-          currentTheme !== "brazil"
-        ) {
-          window.location.href = "https://weight.brasileiro.ca";
-        } else if (
-          currentDomain === "weight.brasileiro.ca" &&
-          currentTheme === "brazil"
-        ) {
-          window.location.href = "https://peso.brasileiro.ca";
-        }
       }
 
       const savedLang = localStorage.getItem("language") || "en-us";
