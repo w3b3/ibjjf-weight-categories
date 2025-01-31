@@ -42,9 +42,65 @@
                 font-size: 2rem;
             }
         }
+
+        .flag-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+        }
+      .flag {
+            width: 30px;
+            height: 20px;
+            margin: 0 5px; /* Space between flags */
+            cursor: pointer;
+            border: 1px solid transparent; /* Add a transparent border */
+            transition: border-color 0.3s; /* Smooth border transition */
+        }
+
+      .flag:hover {
+            border-color: #ccc; /* Show border on hover */
+        }
+
+
+        /* Theme colors */
+        body.usa-theme {
+            background-color: #f0f2f5; /* Light gray background */
+            color: #333; /* Dark gray text */
+        }
+      .usa-theme.category-button {
+          background-color: #fff;
+          color: #333;
+        }
+      .usa-theme.category-button:hover {
+          background-color: #eee;
+        }
+      .usa-theme.disabled {
+          background-color: #ddd;
+        }
+
+        body.brazil-theme {
+            background-color: #ffe9c4; /* Light yellow background */
+            color: #002f5f; /* Dark blue text */
+        }
+      .brazil-theme.category-button {
+          background-color: #009c3b; /* Green */
+          color: #ffe9c4; /* Yellow */
+        }
+      .brazil-theme.category-button:hover {
+          background-color: #00852c; /* Darker green */
+        }
+      .brazil-theme.disabled {
+          background-color: #c0c0c0; /* Light gray */
+          color: #888;
+        }
     </style>
 </head>
 <body>
+    <div class="flag-container">
+        <img src="https://flagsapi.com/US/flat/32.png" alt="USA Flag" class="flag" onclick="setTheme('usa')" id="usa-flag">
+        <img src="https://flagsapi.com/BR/flat/32.png" alt="Brazil Flag" class="flag" onclick="setTheme('brazil')" id="brazil-flag">
+    </div>
     <div class="container-fluid h-100">
         <div class="row h-100 justify-content-center align-items-center">
             <div class="col-md-4 col-sm-6"><button class="category-button" onclick="submitResponse('Rooster')" id="rooster">Rooster</button></div>
@@ -103,6 +159,20 @@
             });
         }
 
+
+        function setTheme(theme) {
+            document.body.classList.remove('usa-theme', 'brazil-theme'); // Remove existing themes
+            document.body.classList.add(theme + '-theme'); // Add the selected theme
+            localStorage.setItem('theme', theme); // Store the selected theme in local storage
+        }
+
+        // Load theme from local storage on page load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else {
+          setTheme('usa'); // Default theme
+        }
     </script>
 </body>
 </html>
