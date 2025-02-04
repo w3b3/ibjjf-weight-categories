@@ -202,7 +202,9 @@
             button.disabled = true;
         });
         // find the one with the id, and navigate to the parent element to remove the disabled class 
-        document.getElementById(votedCategory.toLowerCase()).parentElement.classList.remove("disabled");
+        const parent = document.getElementById(votedCategory.toLowerCase()).parentElement;
+        parent.classList.remove("disabled");
+        parent.disabled = false;
     }
 
     function setTheme(theme) {
