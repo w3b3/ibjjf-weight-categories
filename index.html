@@ -153,7 +153,6 @@
         },
     };
 
-    const buttons = document.querySelectorAll(".category-button");
     // needs to be reassigned after being set in the script tag
     let votedCategory = localStorage.getItem("votedCategory");
     const categoryButtonsContainer = document.getElementById(
@@ -183,10 +182,10 @@
                 localStorage.setItem("votedCategory", category);
                 votedCategory = category;
                 disableAllButtons();
-                alert(data.message);
+                // alert(data.message);
                 // No need to fetch results here anymore
             } else {
-                alert(data.error);
+                // alert(data.error);
             }
         } catch (error) {
             console.error("Error submitting response:", error);
@@ -195,6 +194,7 @@
     }
 
     function disableAllButtons() {
+        const buttons = document.getElementsByName("button");
         buttons.forEach((button) => {
             button.classList.add("disabled");
             button.disabled = true;
