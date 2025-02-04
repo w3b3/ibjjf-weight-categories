@@ -15,5 +15,13 @@
   ],
   "theme_color": "#fffff4",
   "background_color": "#f4ffff",
-  "display": "standalone"
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "id": "ca.brasileiro.Weights",
+  "orientation": "portrait",
+  "description": "A simple app to check the weight categories for IBJJF competitions",
+  "lang": "en",
+  "dir": "ltr",
+  "splash_pages": null
 }
