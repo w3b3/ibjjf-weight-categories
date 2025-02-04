@@ -205,6 +205,8 @@
         const parent = document.getElementById(votedCategory.toLowerCase()).parentElement;
         parent.classList.remove("disabled");
         parent.disabled = false;
+        // self
+        const self = document.getElementById(votedCategory.toLowerCase()).classList.add("text-bg-warning");
     }
 
     function setTheme(theme) {
