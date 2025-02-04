@@ -202,11 +202,13 @@
             button.disabled = true;
         });
         // find the one with the id, and navigate to the parent element to remove the disabled class 
-        const parent = document.getElementById(votedCategory.toLowerCase()).parentElement;
-        parent.classList.remove("disabled");
-        parent.disabled = false;
+        const parent = document.getElementById(votedCategory.toLowerCase())?.parentElement;
+        if (parent) {
+            parent.classList.remove("disabled");
+            parent.disabled = false;
+        }
         // self
-        const self = document.getElementById(votedCategory.toLowerCase()).classList.add("text-bg-warning");
+        const self = document.getElementById(votedCategory.toLowerCase())?.classList.add("text-bg-warning");
     }
 
     function setTheme(theme) {
