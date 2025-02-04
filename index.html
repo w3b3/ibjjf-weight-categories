@@ -16,17 +16,17 @@
     <!--    add local style.css-->
     <!--        <link rel="stylesheet" href="style.css" />-->
     <script>
-        function checkAndRedirectDomain() {
-            const currentDomain = window.location.hostname;
-            const currentTheme = localStorage.getItem("theme");
+        // function checkAndRedirectDomain() {
+        //     const currentDomain = window.location.hostname;
+        //     const currentTheme = localStorage.getItem("theme");
 
-            // Only redirect if we have a mismatch between domain and theme
-            if (currentDomain === "peso.brasileiro.ca" && currentTheme === "usa") {
-                window.location.replace("https://weight.brasileiro.ca");
-            } else if (currentDomain === "weight.brasileiro.ca" && currentTheme === "brazil") {
-                window.location.replace("https://peso.brasileiro.ca");
-            }
-        }
+        //     // Only redirect if we have a mismatch between domain and theme
+        //     if (currentDomain === "peso.brasileiro.ca" && currentTheme === "usa") {
+        //         window.location.replace("https://weight.brasileiro.ca");
+        //     } else if (currentDomain === "weight.brasileiro.ca" && currentTheme === "brazil") {
+        //         window.location.replace("https://peso.brasileiro.ca");
+        //     }
+        // }
 
         // Remove the DOMContentLoaded listener since we'll call it after theme is set
     </script>
@@ -232,7 +232,7 @@
         localStorage.setItem("theme", theme);
 
         // Check domain after theme is set
-        setTimeout(checkAndRedirectDomain, 100); // Small delay to ensure theme is saved
+        // setTimeout(checkAndRedirectDomain, 100); // Small delay to ensure theme is saved
     }
 
     // Remove the fetch for translations.json and directly load categories
