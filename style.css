@@ -1,0 +1,294 @@
+body {
+    background-color: #f8f9fa;
+    height: 100%;
+    margin: 0;
+}
+
+/* Remove duplicate category-button base styles and consolidate here */
+.category-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    height: 150px;
+    width: 100%;
+    text-align: center;
+    border-radius: 10px;
+    margin: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* USA theme gradients */
+body.usa-theme .col-md-4:nth-child(3n + 1) .category-button {
+    background: linear-gradient(135deg, #e0162b 0%, #ffffff 100%);
+    color: white;
+}
+
+body.usa-theme .col-md-4:nth-child(3n + 2) .category-button {
+    background: linear-gradient(135deg, #041e42 0%, #ffffff 100%);
+    color: white;
+}
+
+body.usa-theme .col-md-4:nth-child(3n + 3) .category-button {
+    background: linear-gradient(135deg, #ffffff 0%, #e0162b 100%);
+    color: #041e42;
+}
+
+/* Brazil theme gradients */
+body.brazil-theme .col-md-4:nth-child(3n + 1) .category-button {
+    background: linear-gradient(135deg, #009c3b 0%, #ffe100 100%);
+    color: white;
+}
+
+body.brazil-theme .col-md-4:nth-child(3n + 2) .category-button {
+    background: linear-gradient(135deg, #002776 0%, #009c3b 100%);
+    color: white;
+}
+
+body.brazil-theme .col-md-4:nth-child(3n + 3) .category-button {
+    background: linear-gradient(135deg, #ffe100 0%, #009c3b 100%);
+    color: #002776;
+}
+
+/* Hover effects */
+.category-button:hover:not(.disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Disabled state */
+.category-button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    pointer-events: none;
+}
+
+.header-container {
+    /* position: absolute; */
+    /* top: 0; */
+    /* right: 0; */
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: #333;
+    /* box-shadow: 0 2px 4px rgba(0,0,0,0.05); */
+    width: 100%;
+    padding: 15px 20px;
+}
+
+.flag-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.login-button {
+    padding: 6px 12px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: goldenrod;
+    color: #000;
+    cursor: not-allowed;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+.login-button:hover {
+    opacity: 0.8;
+}
+
+.flag {
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: border-color 0.3s;
+}
+
+/* Theme colors */
+body.usa-theme {
+    background-color: #555; /* Light gray background */
+    color: #333; /* Dark gray text */
+}
+.usa-theme.category-button {
+    background-color: #fff;
+    color: #333;
+}
+.usa-theme.category-button:hover {
+    background-color: #eee;
+}
+.usa-theme.disabled {
+    background-color: #ddd;
+}
+
+body.brazil-theme {
+    background-color: #ddd; /* Light yellow background */
+    color: #002f5f; /* Dark blue text */
+}
+.brazil-theme.category-button {
+    background-color: #009c3b; /* Green */
+    color: #ffe9c4; /* Yellow */
+}
+.brazil-theme.category-button:hover {
+    background-color: #00852c; /* Darker green */
+}
+.brazil-theme.disabled {
+    background-color: #c0c0c0; /* Light gray */
+    color: #888;
+}
+
+/* Updated theme colors and gradients */
+body {
+    background-color: #f8f9fa; /* Neutral light gray background */
+}
+
+body.usa-theme {
+    color: #333;
+}
+
+body.brazil-theme {
+    color: #333;
+}
+
+.category-button {
+    /* ...existing properties... */
+    background: linear-gradient(135deg, #fff, #f0f0f0);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* USA theme gradients */
+.usa-theme .category-button:nth-child(3n + 1) button {
+    background: linear-gradient(135deg, #e0162b, #fff);
+    color: #fff;
+}
+
+.usa-theme .category-button:nth-child(3n + 2) button {
+    background: linear-gradient(135deg, #041e42, #fff);
+    color: #fff;
+}
+
+.usa-theme .category-button:nth-child(3n + 3) button {
+    background: linear-gradient(135deg, #fff, #e0162b);
+    color: #333;
+}
+
+/* Brazil theme gradients */
+.brazil-theme .category-button:nth-child(3n + 1) button {
+    background: linear-gradient(135deg, #009c3b, #ffe100);
+    color: #fff;
+}
+
+.brazil-theme .category-button:nth-child(3n + 2) button {
+    background: linear-gradient(135deg, #002776, #009c3b);
+    color: #fff;
+}
+
+.brazil-theme .category-button:nth-child(3n + 3) button {
+    background: linear-gradient(135deg, #ffe100, #009c3b);
+    color: #333;
+}
+
+/* Hover states */
+.usa-theme .category-button button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+.brazil-theme .category-button button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+/* Disabled state */
+.disabled {
+    opacity: 0.5 !important;
+    transform: none !important;
+    cursor: not-allowed !important;
+}
+
+/* Add these new styles to your existing style section */
+.category-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+/* .category-weight {
+  font-size: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.category-button:hover .category-weight,
+.category-button:focus .category-weight {
+  opacity: 1;
+} */
+
+.category-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+@media (min-width: 768px) {
+    .category-name {
+        font-size: 2rem;
+    }
+    .category-weight {
+        font-size: 1.2rem;
+    }
+}
+
+/* Add these new styles and update existing ones */
+.category-weight {
+    position: relative;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.secondary-weight {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.category-weight:hover .secondary-weight {
+    opacity: 1;
+    transform: translateX(-50%) translateY(5px);
+}
+
+.category-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+@media (min-width: 768px) {
+    .category-name {
+        font-size: 2rem;
+    }
+    .category-weight {
+        font-size: 1.2rem;
+    }
+}

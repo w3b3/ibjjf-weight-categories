@@ -1,584 +1,295 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IBJJF Weight Category Survey</title>
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>IBJJF Weight Category</title>
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
     />
-    <style>
-      body {
-        background-color: #f8f9fa;
-        height: 100%;
-        margin: 0;
-      }
-
-      /* Remove duplicate category-button base styles and consolidate here */
-      .category-button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        padding: 10px;
-        height: 150px;
-        width: 100%;
-        text-align: center;
-        border-radius: 10px;
-        margin: 5px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-      }
-
-      /* USA theme gradients */
-      body.usa-theme .col-md-4:nth-child(3n + 1) .category-button {
-        background: linear-gradient(135deg, #e0162b 0%, #ffffff 100%);
-        color: white;
-      }
-
-      body.usa-theme .col-md-4:nth-child(3n + 2) .category-button {
-        background: linear-gradient(135deg, #041e42 0%, #ffffff 100%);
-        color: white;
-      }
-
-      body.usa-theme .col-md-4:nth-child(3n + 3) .category-button {
-        background: linear-gradient(135deg, #ffffff 0%, #e0162b 100%);
-        color: #041e42;
-      }
-
-      /* Brazil theme gradients */
-      body.brazil-theme .col-md-4:nth-child(3n + 1) .category-button {
-        background: linear-gradient(135deg, #009c3b 0%, #ffe100 100%);
-        color: white;
-      }
-
-      body.brazil-theme .col-md-4:nth-child(3n + 2) .category-button {
-        background: linear-gradient(135deg, #002776 0%, #009c3b 100%);
-        color: white;
-      }
-
-      body.brazil-theme .col-md-4:nth-child(3n + 3) .category-button {
-        background: linear-gradient(135deg, #ffe100 0%, #009c3b 100%);
-        color: #002776;
-      }
-
-      /* Hover effects */
-      .category-button:hover:not(.disabled) {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
-
-      /* Disabled state */
-      .category-button.disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-        transform: none;
-        pointer-events: none;
-      }
-
-      .header-container {
-        /* position: absolute; */
-        /* top: 0; */
-        /* right: 0; */
-        padding: 10px 20px;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        background-color: #333;
-        /* box-shadow: 0 2px 4px rgba(0,0,0,0.05); */
-        width: 100%;
-        padding: 15px 20px;
-      }
-
-      .flag-container {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .login-button {
-        padding: 6px 12px;
-        border: 2px solid #ccc;
-        border-radius: 4px;
-        background-color: goldenrod;
-        color: #000;
-        cursor: not-allowed;
-        font-size: 0.9rem;
-        opacity: 0.7;
-      }
-
-      .login-button:hover {
-        opacity: 0.8;
-      }
-
-      .flag {
-        width: 30px;
-        height: 20px;
-        cursor: pointer;
-        border: 1px solid transparent;
-        transition: border-color 0.3s;
-      }
-
-      /* Theme colors */
-      body.usa-theme {
-        background-color: #555; /* Light gray background */
-        color: #333; /* Dark gray text */
-      }
-      .usa-theme.category-button {
-        background-color: #fff;
-        color: #333;
-      }
-      .usa-theme.category-button:hover {
-        background-color: #eee;
-      }
-      .usa-theme.disabled {
-        background-color: #ddd;
-      }
-
-      body.brazil-theme {
-        background-color: #ddd; /* Light yellow background */
-        color: #002f5f; /* Dark blue text */
-      }
-      .brazil-theme.category-button {
-        background-color: #009c3b; /* Green */
-        color: #ffe9c4; /* Yellow */
-      }
-      .brazil-theme.category-button:hover {
-        background-color: #00852c; /* Darker green */
-      }
-      .brazil-theme.disabled {
-        background-color: #c0c0c0; /* Light gray */
-        color: #888;
-      }
-
-      /* Updated theme colors and gradients */
-      body {
-        background-color: #f8f9fa; /* Neutral light gray background */
-      }
-
-      body.usa-theme {
-        color: #333;
-      }
-
-      body.brazil-theme {
-        color: #333;
-      }
-
-      .category-button {
-        /* ...existing properties... */
-        background: linear-gradient(135deg, #fff, #f0f0f0);
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-      }
-
-      /* USA theme gradients */
-      .usa-theme .category-button:nth-child(3n + 1) button {
-        background: linear-gradient(135deg, #e0162b, #fff);
-        color: #fff;
-      }
-
-      .usa-theme .category-button:nth-child(3n + 2) button {
-        background: linear-gradient(135deg, #041e42, #fff);
-        color: #fff;
-      }
-
-      .usa-theme .category-button:nth-child(3n + 3) button {
-        background: linear-gradient(135deg, #fff, #e0162b);
-        color: #333;
-      }
-
-      /* Brazil theme gradients */
-      .brazil-theme .category-button:nth-child(3n + 1) button {
-        background: linear-gradient(135deg, #009c3b, #ffe100);
-        color: #fff;
-      }
-
-      .brazil-theme .category-button:nth-child(3n + 2) button {
-        background: linear-gradient(135deg, #002776, #009c3b);
-        color: #fff;
-      }
-
-      .brazil-theme .category-button:nth-child(3n + 3) button {
-        background: linear-gradient(135deg, #ffe100, #009c3b);
-        color: #333;
-      }
-
-      /* Hover states */
-      .usa-theme .category-button button:hover {
-        opacity: 0.9;
-        transform: translateY(-2px);
-        transition: all 0.3s ease;
-      }
-
-      .brazil-theme .category-button button:hover {
-        opacity: 0.9;
-        transform: translateY(-2px);
-        transition: all 0.3s ease;
-      }
-
-      /* Disabled state */
-      .disabled {
-        opacity: 0.5 !important;
-        transform: none !important;
-        cursor: not-allowed !important;
-      }
-
-      /* Add these new styles to your existing style section */
-      .category-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-      }
-
-      /* .category-weight {
-        font-size: 1rem;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-      }
-
-      .category-button:hover .category-weight,
-      .category-button:focus .category-weight {
-        opacity: 1;
-      } */
-
-      .category-name {
-        font-size: 1.5rem;
-        font-weight: bold;
-      }
-
-      @media (min-width: 768px) {
-        .category-name {
-          font-size: 2rem;
-        }
-        .category-weight {
-          font-size: 1.2rem;
-        }
-      }
-
-      /* Add these new styles and update existing ones */
-      .category-weight {
-        position: relative;
-        font-size: 1rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 5px;
-      }
-
-      .secondary-weight {
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-        opacity: 0;
-        transition: all 0.3s ease;
-        background: rgba(0, 0, 0, 0.8);
-        color: white;
-        padding: 4px 8px;
-        border-radius: 4px;
-        white-space: nowrap;
-        pointer-events: none;
-      }
-
-      .category-weight:hover .secondary-weight {
-        opacity: 1;
-        transform: translateX(-50%) translateY(5px);
-      }
-
-      .category-name {
-        font-size: 1.5rem;
-        font-weight: bold;
-        margin-bottom: 5px;
-      }
-
-      @media (min-width: 768px) {
-        .category-name {
-          font-size: 2rem;
-        }
-        .category-weight {
-          font-size: 1.2rem;
-        }
-      }
-    </style>
+    <!--    class="[^"]*" -->
+    <!--    add local style.css-->
+    <!--        <link rel="stylesheet" href="style.css" />-->
     <script>
-      function checkAndRedirectDomain() {
-        const currentDomain = window.location.hostname;
-        const currentTheme = localStorage.getItem("theme");
-        
-        // Only redirect if we have a mismatch between domain and theme
-        if (currentDomain === "peso.brasileiro.ca" && currentTheme === "usa") {
-          window.location.replace("https://weight.brasileiro.ca");
-        } else if (currentDomain === "weight.brasileiro.ca" && currentTheme === "brazil") {
-          window.location.replace("https://peso.brasileiro.ca");
-        }
-      }
+        function checkAndRedirectDomain() {
+            const currentDomain = window.location.hostname;
+            const currentTheme = localStorage.getItem("theme");
 
-      // Remove the DOMContentLoaded listener since we'll call it after theme is set
+            // Only redirect if we have a mismatch between domain and theme
+            if (currentDomain === "peso.brasileiro.ca" && currentTheme === "usa") {
+                window.location.replace("https://weight.brasileiro.ca");
+            } else if (currentDomain === "weight.brasileiro.ca" && currentTheme === "brazil") {
+                window.location.replace("https://peso.brasileiro.ca");
+            }
+        }
+
+        // Remove the DOMContentLoaded listener since we'll call it after theme is set
     </script>
-  </head>
-  <body>
-    <div class="header-container">
-      <h1 class="text-start text-light" id="title_weight_categories">
-        IBJJF Weight Categories
-      </h1>
-      <div class="flag-container">
+</head>
+<body class="bg-dark">
+<div>
+    <header class="text-bg-success p-1 d-flex flex-row justify-content-around align-items-center" style="max-width: 800px; margin: auto">
+        <h1 class="p-3" id="title_weight_categories">
+            Loading...
+        </h1>
         <img
-          src="https://flagsapi.com/CA/flat/32.png"
-          alt="CA Flag"
-          class="flag"
-          onclick="setTheme('usa')"
-          id="usa-flag"
-        />
-        <img
-          src="https://flagsapi.com/BR/flat/32.png"
-          alt="Brazil Flag"
-          class="flag"
-          onclick="setTheme('brazil')"
-          id="brazil-flag"
-        />
-      </div>
-      <button class="login-button" disabled>Login</button>
-    </div>
-    <div class="container-fluid h-100">
-      <div
-        class="row h-100 justify-content-center align-items-center"
-        id="category-buttons-container"
-      ></div>
-    </div>
+                alt="CA Flag"
+                id="usa-flag"
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-      const translations = {
+                onclick="setTheme('usa')"
+                src="https://flagsapi.com/CA/flat/32.png"
+        />
+        <img
+                alt="Brazil Flag"
+                id="brazil-flag"
+
+                onclick="setTheme('brazil')"
+                src="https://flagsapi.com/BR/flat/32.png"
+        />
+    </header>
+    <div class="text-bg-warning p-1 d-flex flex-row justify-content-around align-items-center">
+        <!--      add a disabled dropdown with the option "MALE - ADULT"-->
+        <select aria-label="Default select example" disabled>
+            <option selected>MALE - ADULT</option>
+        </select>
+        <button disabled>Login</button>
+    </div>
+</div>
+<div>
+    <div
+            class="p-3 d-flex flex-row flex-wrap justify-content-around align-items-center"
+            id="category-buttons-container"
+    ></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const translations = {
         "en-us": {
-          Rooster: {
-            name: "Rooster",
-            weightKg: "57.5 kg",
-            weightLbs: "127 lbs",
-          },
-          "Light Feather": {
-            name: "Light Feather",
-            weightKg: "64 kg",
-            weightLbs: "141 lbs",
-          },
-          Feather: {
-            name: "Feather",
-            weightKg: "70 kg",
-            weightLbs: "154 lbs",
-          },
-          Light: {
-            name: "Light",
-            weightKg: "76 kg",
-            weightLbs: "167.5 lbs",
-          },
-          Middle: {
-            name: "Middle",
-            weightKg: "82.3 kg",
-            weightLbs: "181.5 lbs",
-          },
-          "Medium Heavy": {
-            name: "Medium Heavy",
-            weightKg: "88.3 kg",
-            weightLbs: "194.5 lbs",
-          },
-          Heavy: {
-            name: "Heavy",
-            weightKg: "94.3 kg",
-            weightLbs: "208 lbs",
-          },
-          "Super Heavy": {
-            name: "Super Heavy",
-            weightKg: "100.5 kg",
-            weightLbs: "221.5 lbs",
-          },
-          "Ultra Heavy": {
-            name: "Ultra Heavy",
-            weightKg: "> 100.5 kg",
-            weightLbs: "> 221.5 lbs",
-          },
+            Rooster: {
+                name: "Rooster",
+                weightKg: "57.5 kg",
+                weightLbs: "127 lbs",
+            },
+            "Light Feather": {
+                name: "Light Feather",
+                weightKg: "64 kg",
+                weightLbs: "141 lbs",
+            },
+            Feather: {
+                name: "Feather",
+                weightKg: "70 kg",
+                weightLbs: "154 lbs",
+            },
+            Light: {
+                name: "Light",
+                weightKg: "76 kg",
+                weightLbs: "167.5 lbs",
+            },
+            Middle: {
+                name: "Middle",
+                weightKg: "82.3 kg",
+                weightLbs: "181.5 lbs",
+            },
+            "Medium Heavy": {
+                name: "Medium Heavy",
+                weightKg: "88.3 kg",
+                weightLbs: "194.5 lbs",
+            },
+            Heavy: {
+                name: "Heavy",
+                weightKg: "94.3 kg",
+                weightLbs: "208 lbs",
+            },
+            "Super Heavy": {
+                name: "Super Heavy",
+                weightKg: "100.5 kg",
+                weightLbs: "221.5 lbs",
+            },
+            "Ultra Heavy": {
+                name: "Ultra Heavy",
+                weightKg: "> 100.5 kg",
+                weightLbs: "> 221.5 lbs",
+            },
         },
         "pt-br": {
-          Rooster: {
-            name: "Galo",
-            weightKg: "57,5 kg",
-            weightLbs: "127 lbs",
-          },
-          "Light Feather": {
-            name: "Pluma Leve",
-            weightKg: "64 kg",
-            weightLbs: "141 lbs",
-          },
-          Feather: {
-            name: "Pluma",
-            weightKg: "70 kg",
-            weightLbs: "154 lbs",
-          },
-          Light: {
-            name: "Leve",
-            weightKg: "76 kg",
-            weightLbs: "167,5 lbs",
-          },
-          Middle: {
-            name: "Médio",
-            weightKg: "82,3 kg",
-            weightLbs: "181,5 lbs",
-          },
-          "Medium Heavy": {
-            name: "Meio-Pesado",
-            weightKg: "88,3 kg",
-            weightLbs: "194,5 lbs",
-          },
-          Heavy: {
-            name: "Pesado",
-            weightKg: "94,3 kg",
-            weightLbs: "208 lbs",
-          },
-          "Super Heavy": {
-            name: "Super Pesado",
-            weightKg: "100,5 kg",
-            weightLbs: "221,5 lbs",
-          },
-          "Ultra Heavy": {
-            name: "Pesadíssimo",
-            weightKg: "> 100,5 kg",
-            weightLbs: "> 221,5 lbs",
-          },
+            Rooster: {
+                name: "Galo",
+                weightKg: "57,5 kg",
+                weightLbs: "127 lbs",
+            },
+            "Light Feather": {
+                name: "Pluma Leve",
+                weightKg: "64 kg",
+                weightLbs: "141 lbs",
+            },
+            Feather: {
+                name: "Pluma",
+                weightKg: "70 kg",
+                weightLbs: "154 lbs",
+            },
+            Light: {
+                name: "Leve",
+                weightKg: "76 kg",
+                weightLbs: "167,5 lbs",
+            },
+            Middle: {
+                name: "Médio",
+                weightKg: "82,3 kg",
+                weightLbs: "181,5 lbs",
+            },
+            "Medium Heavy": {
+                name: "Meio-Pesado",
+                weightKg: "88,3 kg",
+                weightLbs: "194,5 lbs",
+            },
+            Heavy: {
+                name: "Pesado",
+                weightKg: "94,3 kg",
+                weightLbs: "208 lbs",
+            },
+            "Super Heavy": {
+                name: "Super Pesado",
+                weightKg: "100,5 kg",
+                weightLbs: "221,5 lbs",
+            },
+            "Ultra Heavy": {
+                name: "Pesadíssimo",
+                weightKg: "> 100,5 kg",
+                weightLbs: "> 221,5 lbs",
+            },
         },
-      };
+    };
 
-      const buttons = document.querySelectorAll(".category-button");
-      const votedCategory = localStorage.getItem("votedCategory");
-      const categoryButtonsContainer = document.getElementById(
+    const buttons = document.querySelectorAll(".category-button");
+    const votedCategory = localStorage.getItem("votedCategory");
+    const categoryButtonsContainer = document.getElementById(
         "category-buttons-container"
-      );
+    );
 
-      if (votedCategory) {
+    if (votedCategory) {
         disableAllButtons();
         alert("You have already voted for: " + votedCategory);
-      }
+    }
 
-      async function submitResponse(category) {
+    async function submitResponse(category) {
         if (votedCategory) return;
 
         try {
-          const response = await fetch("/submit", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ category }), // Send only the category
-          });
+            const response = await fetch("/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({category}), // Send only the category
+            });
 
-          const data = await response.json();
-          if (response.ok) {
-            localStorage.setItem("votedCategory", category);
-            disableAllButtons();
-            alert(data.message);
-            // No need to fetch results here anymore
-          } else {
-            alert(data.error);
-          }
+            const data = await response.json();
+            if (response.ok) {
+                localStorage.setItem("votedCategory", category);
+                disableAllButtons();
+                alert(data.message);
+                // No need to fetch results here anymore
+            } else {
+                alert(data.error);
+            }
         } catch (error) {
-          console.error("Error submitting response:", error);
-          alert("An error occurred. Please try again later.");
+            console.error("Error submitting response:", error);
+            alert("An error occurred. Please try again later.");
         }
-      }
+    }
 
-      function disableAllButtons() {
+    function disableAllButtons() {
         buttons.forEach((button) => {
-          button.classList.add("disabled");
-          button.disabled = true;
+            button.classList.add("disabled");
+            button.disabled = true;
         });
-      }
+    }
 
-      function setTheme(theme) {
+    function setTheme(theme) {
         if (theme === "usa") {
-          document.body.classList.remove("brazil-theme");
-          document.body.classList.add(theme + "-theme");
-          setLanguage("en-us");
-          //   find the element with ID title_weight_categories and set the title based on the language
-          document.getElementById("title_weight_categories").innerText =
-            "IBJJF Weight Categories";
-          //   window.location.href = "https://weight.brasileiro.ca";
+            document.body.classList.remove("brazil-theme");
+            document.body.classList.add(theme + "-theme");
+            setLanguage("en-us");
+            //   find the element with ID title_weight_categories and set the title based on the language
+            document.getElementById("title_weight_categories").innerText =
+                "IBJJF Weight Categories";
+            //   window.location.href = "https://weight.brasileiro.ca";
         } else {
-          document.body.classList.remove("usa-theme");
-          document.body.classList.add(theme + "-theme");
-          setLanguage("pt-br");
-          //   find the element with ID title_weight_categories and set the title based on the language
-          document.getElementById("title_weight_categories").innerText =
-            "Categorias de Peso CBJJ";
-          //   window.location.href = "https://peso.brasileiro.ca";
+            document.body.classList.remove("usa-theme");
+            document.body.classList.add(theme + "-theme");
+            setLanguage("pt-br");
+            //   find the element with ID title_weight_categories and set the title based on the language
+            document.getElementById("title_weight_categories").innerText =
+                "Categorias de Peso CBJJ";
+            //   window.location.href = "https://peso.brasileiro.ca";
         }
         localStorage.setItem("theme", theme);
-        
+
         // Check domain after theme is set
         setTimeout(checkAndRedirectDomain, 100); // Small delay to ensure theme is saved
-      }
+    }
 
-      // Remove the fetch for translations.json and directly load categories
-      function loadCategories(lang) {
+    // Remove the fetch for translations.json and directly load categories
+    function loadCategories(lang) {
         categoryButtonsContainer.innerHTML = "";
         const isUSA = document.body.classList.contains("usa-theme");
 
         const categories = [
-          "Rooster",
-          "Light Feather",
-          "Feather",
-          "Light",
-          "Middle",
-          "Medium Heavy",
-          "Heavy",
-          "Super Heavy",
-          "Ultra Heavy",
+            "Rooster",
+            "Light Feather",
+            "Feather",
+            "Light",
+            "Middle",
+            "Medium Heavy",
+            "Heavy",
+            "Super Heavy",
+            "Ultra Heavy",
         ];
 
         categories.forEach((category) => {
-          const localizedData = translations[lang][category];
-          const primaryWeight = isUSA
-            ? localizedData.weightLbs
-            : localizedData.weightKg;
-          const secondaryWeight = isUSA
-            ? localizedData.weightKg
-            : localizedData.weightLbs;
+            const localizedData = translations[lang][category];
+            const primaryWeight = isUSA
+                ? localizedData.weightLbs
+                : localizedData.weightKg;
+            const secondaryWeight = isUSA
+                ? localizedData.weightKg
+                : localizedData.weightLbs;
 
-          const button = document.createElement("div");
-          button.classList.add("col-md-4", "col-sm-6");
-          button.innerHTML = `
-            <button class="category-button" onclick="submitResponse('${category}')" id="${category.toLowerCase()}">
-              <div class="category-content">
-                <div class="category-name">${localizedData.name}</div>
-                <div class="category-weight">
-                  <div class="primary-weight">${primaryWeight}</div>
-                  <div class="secondary-weight">${secondaryWeight}</div>
-                </div>
+            const button = document.createElement("button");
+            // max width should be 50% of the container on mid to large screens, and 100 on small screens
+            button.classList.add("w-75", "mb-2", "category-button", "btn", "btn-secondary", "btn-sm");
+            // set max width to a fixed value
+            button.style.maxWidth = "300px";
+            button.innerHTML = `
+              <div onclick="submitResponse('${category}')" id="${category.toLowerCase()}">
+                <h3 class="">${localizedData.name}</h3>
+                  <h2 class="text-bg-info fw-bolder ">${primaryWeight}</h2>
               </div>
-            </button>
           `;
-          categoryButtonsContainer.appendChild(button);
+            categoryButtonsContainer.appendChild(button);
         });
 
         if (votedCategory) {
-          disableAllButtons();
+            disableAllButtons();
         }
-      }
+    }
 
-      function setLanguage(lang) {
+    function setLanguage(lang) {
         localStorage.setItem("language", lang);
         loadCategories(lang);
-      }
+    }
 
-      const savedTheme = localStorage.getItem("theme");
-      if (savedTheme) {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
         setTheme(savedTheme);
-      } else {
+    } else {
         setTheme("usa");
-      }
+    }
 
-      const savedLang = localStorage.getItem("language") || "en-us";
-      setLanguage(savedLang);
-    </script>
-  </body>
+    const savedLang = localStorage.getItem("language") || "en-us";
+    setLanguage(savedLang);
+</script>
+</body>
 </html>
