@@ -154,7 +154,8 @@
     };
 
     const buttons = document.querySelectorAll(".category-button");
-    const votedCategory = localStorage.getItem("votedCategory");
+    // needs to be reassigned after being set in the script tag
+    let votedCategory = localStorage.getItem("votedCategory");
     const categoryButtonsContainer = document.getElementById(
         "category-buttons-container"
     );
@@ -180,6 +181,7 @@
             // if (response.ok) {
             if (true) {
                 localStorage.setItem("votedCategory", category);
+                votedCategory = category;
                 disableAllButtons();
                 alert(data.message);
                 // No need to fetch results here anymore
