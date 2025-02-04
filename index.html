@@ -195,11 +195,14 @@
 
     function disableAllButtons() {
         const buttons = document.getElementsByTagName("button");
-        buttons.forEach((button) => {
+        // buttons.forEach is not a function, so we need to convert it to an array first
+        const buttonsArray = Array.from(buttons);
+        buttonsArray.forEach((button) => {
             button.classList.add("disabled");
             button.disabled = true;
         });
-         document.getElementById(votedCategory.toLowerCase()).classList.remove("disabled");
+        // find the one with the id, and navigate to the parent element to remove the disabled class 
+        document.getElementById(votedCategory.toLowerCase()).parentElement.classList.remove("disabled");
     }
 
     function setTheme(theme) {
