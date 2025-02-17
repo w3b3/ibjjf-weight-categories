@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  app:
+    platform: linux/amd64
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - API_KEY=${API_KEY}
+      - DB_STORAGE=${DB_STORAGE}
+      - PORT=${PORT}
+      - NODE_ENV=development
+      - DB_HOST=db
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=ibjjf_dev
+      - DB_PORT=5432
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+      - ./db:/usr/src/app/db
+    depends_on:
+      - db
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ibjjf_dev
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
