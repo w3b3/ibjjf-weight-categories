@@ -43,3 +43,39 @@ bjj-api/
     └── data.sqlite
 ```
 
+## testing the api
+
+Checking entries
+```sh
+curl -H "X-API-Key: your-secret-api-key" http://localhost:3000/api/students
+```
+
+adding a new entry successfully
+
+```sh
+curl -H "X-API-Key: your-secret-api-key" -X POST -H "Content-Type: application/json" -d '{"name": "New Student", "age": 25, "weight": 75.5, "belt": "White", "stripe": 0}' http://localhost:3000/api/students
+```
+
+[❌] adding a new entry WRONG
+
+```sh
+curl -X POST -H "Content-Type: application/json" -d '{"name": "New Student", "age": 25, "weight": 75.5, "belt": "White", "stripe": 0}' http://localhost:3000/api/students
+```
+
+
+## database
+
+`forcing pg isolated local instance`
+
+```
+docker run -p 5432:5432  -v postgres_data:/var/lib/postgresql/data  -e POSTGRES_USER=your_user  -e POSTGRES_PASSWORD=your_password  -e POSTGRES_DB=your_database  -d postgres:latest
+```
+
+`/Users/ds/code/ibjjf/api/src/config/database.js`
+```
+host: process.env.DB_HOST || 'localhost',
+username: process.env.DB_USER || 'postgres',
+password: process.env.DB_PASSWORD || 'postgres',
+database: process.env.DB_NAME || 'ibjjf_dev',
+port: process.env.DB_PORT || 5432
+```
