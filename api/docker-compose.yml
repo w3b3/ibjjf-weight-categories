@@ -1,36 +1,51 @@
 version: '3.8'
+name: app
 services:
-  app:
-    platform: linux/amd64
+  api:
+    # platform: linux/amd64
     build: .
     ports:
       - "3000:3000"
     environment:
       - API_KEY=${API_KEY}
-      - DB_STORAGE=${DB_STORAGE}
       - PORT=${PORT}
-      - NODE_ENV=development
-      - DB_HOST=db
-      - DB_USER=postgres
-      - DB_PASSWORD=postgres
-      - DB_NAME=ibjjf_dev
-      - DB_PORT=5432
+      - NODE_ENV=${NODE_ENV}
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+      - DB_PORT=${DB_PORT}
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
       - ./db:/usr/src/app/db
+    networks:
+      - container-network
     depends_on:
-      - db
+      db:
+        condition: service_healthy
   db:
     image: postgres:16-alpine
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: ibjjf_dev
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - container-network
     ports:
       - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: always
 
+networks:
+  container-network:
+    driver: bridge
 volumes:
   postgres_data:
