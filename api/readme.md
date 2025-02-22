@@ -41,7 +41,7 @@ docker-compose exec api ping db
 - [x] Check all postgres references are good
 - [ ] Make sure all *prod* `.env` are updated
 - [x] Commit it all once working (and make sure to commit on every non working significant step)
-- [ ] 
+- [ ] Make sure that during most (if not all) of my docker builds, I have a list of functions that are tested, in order to guarantee my changes are not breaking existing code.
 
 
 ## Key Security Considerations
@@ -114,7 +114,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"name": "New Student", "ag
 `forcing pg isolated local instance`
 
 ```
-docker run -p 5432:5432  -v postgres_data:/var/lib/postgresql/data  -e POSTGRES_USER=your_user  -e POSTGRES_PASSWORD=your_password  -e POSTGRES_DB=your_database  -d postgres:latest
+docker run --name pg_test -p 5433:5432 -v postgres_data:/var/lib/postgresql/data -e POSTGRES_USER=your_user_test -e POSTGRES_PASSWORD=your_password_test -e POSTGRES_DB=your_database_test -d postgres:latest
 ```
 
 `/Users/ds/code/ibjjf/api/src/config/database.js`
