@@ -1,4 +1,50 @@
-# Key Security Considerations
+#API
+
+## Docker
+
+Build
+```sh
+docker-compose build --no-cache
+```
+
+Up
+```sh
+docker-compose up
+docker-compose up -d db
+```
+
+Down
+```sh
+docker-compose down
+```
+
+### Docker debugging
+
+Config (check all env variables)
+```sh
+docker-compose config
+```
+
+Inspect network
+```sh
+docker network inspect api-network
+docker network ls
+```
+
+Ping (not installed in node:slim)
+```sh
+docker-compose exec api ping db
+```
+
+**TODO**
+
+- [x] Check all postgres references are good
+- [ ] Make sure all *prod* `.env` are updated
+- [x] Commit it all once working (and make sure to commit on every non working significant step)
+- [ ] 
+
+
+## Key Security Considerations
 
 * HTTPS
 * Input Validation
@@ -73,9 +119,9 @@ docker run -p 5432:5432  -v postgres_data:/var/lib/postgresql/data  -e POSTGRES_
 
 `/Users/ds/code/ibjjf/api/src/config/database.js`
 ```
-host: process.env.DB_HOST || 'localhost',
-username: process.env.DB_USER || 'postgres',
-password: process.env.DB_PASSWORD || 'postgres',
-database: process.env.DB_NAME || 'ibjjf_dev',
-port: process.env.DB_PORT || 5432
+host: process.env.DB_HOST,
+username: process.env.DB_USER,
+password: process.env.DB_PASSWORD,
+database: process.env.DB_NAME,
+port: process.env.DB_PORT
 ```
