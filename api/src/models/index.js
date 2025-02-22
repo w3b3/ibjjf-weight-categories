@@ -13,7 +13,7 @@ const sequelize = new Sequelize(
         host: dbConfig.host,
         port: dbConfig.port,
         dialect: dbConfig.dialect,
-        logging: env === 'development'
+        logging: console.log
     }
 );
 
@@ -43,6 +43,7 @@ db.Student.hasMany(db.Checkin, { foreignKey: 'studentId' });
 db.Checkin.belongsTo(db.Student, { foreignKey: 'studentId' });
 db.Class.hasMany(db.Checkin, {foreignKey: 'classId'});
 db.Checkin.belongsTo(db.Class, {foreignKey: 'classId'});
+
 async function initializeDatabase() {
     try {
         await sequelize.authenticate();
