@@ -28,8 +28,12 @@
         <div class="col-12 d-flex justify-content-center">
             <div class="btn-group w-100 w-sm-auto" role="group" aria-label="Gender category selector">
                 <select class="form-select form-select-sm w-auto" id="gender-category-select" aria-label="Category: Male Adult">
-                    <option value="male" selected>MALE - ADULT</option>
-                    <option value="female">FEMALE - ADULT</option>
+                    <option value="male-adult" selected>MALE - ADULT</option>
+                    <option value="female-adult">FEMALE - ADULT</option>
+                    <option value="male-master">MALE - MASTER</option>
+                    <option value="female-master">FEMALE - MASTER</option>
+                    <option value="male-kids">MALE - KIDS</option>
+                    <option value="female-kids">FEMALE - KIDS</option>
                 </select>
             </div>
         </div>
@@ -40,9 +44,13 @@
     <footer class="mt-5 pt-4 border-top">
         <div class="d-flex flex-column align-items-center gap-2">
             <span class="fw-semibold">Language</span>
-            <div class="d-flex gap-3 justify-content-center">
-                <img alt="CA Flag" id="usa-flag" onclick="setTheme('usa')" src="https://flagsapi.com/CA/flat/40.png" style="cursor:pointer; width:40px; height:40px;"/>
-                <img alt="Brazil Flag" id="brazil-flag" onclick="setTheme('brazil')" src="https://flagsapi.com/BR/flat/40.png" style="cursor:pointer; width:40px; height:40px;"/>
+            <div class="d-flex gap-3 justify-content-center" id="language-switcher">
+                <button class="btn btn-light border" id="lang-en" onclick="setTheme('usa')" aria-label="Switch to English">
+                  <span style="font-size:2rem;">🇨🇦</span>
+                </button>
+                <button class="btn btn-light border" id="lang-pt" onclick="setTheme('brazil')" aria-label="Switch to Portuguese">
+                  <span style="font-size:2rem;">🇧🇷</span>
+                </button>
             </div>
         </div>
     </footer>
@@ -93,7 +101,7 @@
 <script>
     const translations = {
         "en-us": {
-            male: {
+            'male-adult': {
                 Rooster: { name: "Rooster", weightKg: "57.5 kg", weightLbs: "127 lbs" },
                 "Light Feather": { name: "Light Feather", weightKg: "64 kg", weightLbs: "141 lbs" },
                 Feather: { name: "Feather", weightKg: "70 kg", weightLbs: "154 lbs" },
@@ -104,7 +112,7 @@
                 "Super Heavy": { name: "Super Heavy", weightKg: "100.5 kg", weightLbs: "221.5 lbs" },
                 "Ultra Heavy": { name: "Ultra Heavy", weightKg: "> 100.5 kg", weightLbs: "> 221.5 lbs" },
             },
-            female: {
+            'female-adult': {
                 Rooster: { name: "Rooster", weightKg: "47.5 kg", weightLbs: "105 lbs" },
                 "Light Feather": { name: "Light Feather", weightKg: "52.5 kg", weightLbs: "115.7 lbs" },
                 Feather: { name: "Feather", weightKg: "57.5 kg", weightLbs: "126.8 lbs" },
@@ -114,9 +122,50 @@
                 Heavy: { name: "Heavy", weightKg: "79.3 kg", weightLbs: "174.8 lbs" },
                 "Super Heavy": { name: "Super Heavy", weightKg: "> 79.3 kg", weightLbs: "> 174.8 lbs" },
             },
+            'male-master': {
+                Rooster: { name: "Rooster", weightKg: "57.5 kg", weightLbs: "127 lbs" },
+                "Light Feather": { name: "Light Feather", weightKg: "64 kg", weightLbs: "141 lbs" },
+                Feather: { name: "Feather", weightKg: "70 kg", weightLbs: "154 lbs" },
+                Light: { name: "Light", weightKg: "76 kg", weightLbs: "167.5 lbs" },
+                Middle: { name: "Middle", weightKg: "82.3 kg", weightLbs: "181.5 lbs" },
+                "Medium Heavy": { name: "Medium Heavy", weightKg: "88.3 kg", weightLbs: "194.5 lbs" },
+                Heavy: { name: "Heavy", weightKg: "94.3 kg", weightLbs: "208 lbs" },
+                "Super Heavy": { name: "Super Heavy", weightKg: "100.5 kg", weightLbs: "221.5 lbs" },
+                "Ultra Heavy": { name: "Ultra Heavy", weightKg: "> 100.5 kg", weightLbs: "> 221.5 lbs" },
+            },
+            'female-master': {
+                Rooster: { name: "Rooster", weightKg: "47.5 kg", weightLbs: "105 lbs" },
+                "Light Feather": { name: "Light Feather", weightKg: "52.5 kg", weightLbs: "115.7 lbs" },
+                Feather: { name: "Feather", weightKg: "57.5 kg", weightLbs: "126.8 lbs" },
+                Light: { name: "Light", weightKg: "62.5 kg", weightLbs: "138 lbs" },
+                Middle: { name: "Middle", weightKg: "69 kg", weightLbs: "152.1 lbs" },
+                "Medium Heavy": { name: "Medium Heavy", weightKg: "74 kg", weightLbs: "163.1 lbs" },
+                Heavy: { name: "Heavy", weightKg: "79.3 kg", weightLbs: "174.8 lbs" },
+                "Super Heavy": { name: "Super Heavy", weightKg: "> 79.3 kg", weightLbs: "> 174.8 lbs" },
+            },
+            'male-kids': {
+                Rooster: { name: "Rooster", weightKg: "23 kg", weightLbs: "50.7 lbs" },
+                "Light Feather": { name: "Light Feather", weightKg: "27 kg", weightLbs: "59.5 lbs" },
+                Feather: { name: "Feather", weightKg: "31 kg", weightLbs: "68.3 lbs" },
+                Light: { name: "Light", weightKg: "35 kg", weightLbs: "77.2 lbs" },
+                Middle: { name: "Middle", weightKg: "39 kg", weightLbs: "86 lbs" },
+                "Medium Heavy": { name: "Medium Heavy", weightKg: "43 kg", weightLbs: "94.8 lbs" },
+                Heavy: { name: "Heavy", weightKg: "47 kg", weightLbs: "103.6 lbs" },
+                "Super Heavy": { name: "Super Heavy", weightKg: "> 47 kg", weightLbs: "> 103.6 lbs" },
+            },
+            'female-kids': {
+                Rooster: { name: "Rooster", weightKg: "22 kg", weightLbs: "48.5 lbs" },
+                "Light Feather": { name: "Light Feather", weightKg: "26 kg", weightLbs: "57.3 lbs" },
+                Feather: { name: "Feather", weightKg: "30 kg", weightLbs: "66.1 lbs" },
+                Light: { name: "Light", weightKg: "34 kg", weightLbs: "74.9 lbs" },
+                Middle: { name: "Middle", weightKg: "38 kg", weightLbs: "83.8 lbs" },
+                "Medium Heavy": { name: "Medium Heavy", weightKg: "42 kg", weightLbs: "92.6 lbs" },
+                Heavy: { name: "Heavy", weightKg: "46 kg", weightLbs: "101.4 lbs" },
+                "Super Heavy": { name: "Super Heavy", weightKg: "> 46 kg", weightLbs: "> 101.4 lbs" },
+            },
         },
         "pt-br": {
-            male: {
+            'male-adult': {
                 Rooster: { name: "Galo", weightKg: "57,5 kg", weightLbs: "127 lbs" },
                 "Light Feather": { name: "Pluma Leve", weightKg: "64 kg", weightLbs: "141 lbs" },
                 Feather: { name: "Pluma", weightKg: "70 kg", weightLbs: "154 lbs" },
@@ -127,7 +176,7 @@
                 "Super Heavy": { name: "Super Pesado", weightKg: "100,5 kg", weightLbs: "221,5 lbs" },
                 "Ultra Heavy": { name: "Pesadíssimo", weightKg: "> 100,5 kg", weightLbs: "> 221,5 lbs" },
             },
-            female: {
+            'female-adult': {
                 Rooster: { name: "Galo", weightKg: "47,5 kg", weightLbs: "105 lbs" },
                 "Light Feather": { name: "Pluma Leve", weightKg: "52,5 kg", weightLbs: "115,7 lbs" },
                 Feather: { name: "Pluma", weightKg: "57,5 kg", weightLbs: "126,8 lbs" },
@@ -137,8 +186,107 @@
                 Heavy: { name: "Pesado", weightKg: "79,3 kg", weightLbs: "174,8 lbs" },
                 "Super Heavy": { name: "Super Pesado", weightKg: "> 79,3 kg", weightLbs: "> 174,8 lbs" },
             },
+            'male-master': {
+                Rooster: { name: "Galo", weightKg: "57,5 kg", weightLbs: "127 lbs" },
+                "Light Feather": { name: "Pluma Leve", weightKg: "64 kg", weightLbs: "141 lbs" },
+                Feather: { name: "Pluma", weightKg: "70 kg", weightLbs: "154 lbs" },
+                Light: { name: "Leve", weightKg: "76 kg", weightLbs: "167,5 lbs" },
+                Middle: { name: "Médio", weightKg: "82,3 kg", weightLbs: "181,5 lbs" },
+                "Medium Heavy": { name: "Meio-Pesado", weightKg: "88,3 kg", weightLbs: "194,5 lbs" },
+                Heavy: { name: "Pesado", weightKg: "94,3 kg", weightLbs: "208 lbs" },
+                "Super Heavy": { name: "Super Pesado", weightKg: "100,5 kg", weightLbs: "221,5 lbs" },
+                "Ultra Heavy": { name: "Pesadíssimo", weightKg: "> 100,5 kg", weightLbs: "> 221,5 lbs" },
+            },
+            'female-master': {
+                Rooster: { name: "Galo", weightKg: "47,5 kg", weightLbs: "105 lbs" },
+                "Light Feather": { name: "Pluma Leve", weightKg: "52,5 kg", weightLbs: "115,7 lbs" },
+                Feather: { name: "Pluma", weightKg: "57,5 kg", weightLbs: "126,8 lbs" },
+                Light: { name: "Leve", weightKg: "62,5 kg", weightLbs: "138 lbs" },
+                Middle: { name: "Médio", weightKg: "69 kg", weightLbs: "152,1 lbs" },
+                "Medium Heavy": { name: "Meio-Pesado", weightKg: "74 kg", weightLbs: "163,1 lbs" },
+                Heavy: { name: "Pesado", weightKg: "79,3 kg", weightLbs: "174,8 lbs" },
+                "Super Heavy": { name: "Super Pesado", weightKg: "> 79,3 kg", weightLbs: "> 174,8 lbs" },
+            },
+            'male-kids': {
+                Rooster: { name: "Galo", weightKg: "23 kg", weightLbs: "50,7 lbs" },
+                "Light Feather": { name: "Pluma Leve", weightKg: "27 kg", weightLbs: "59,5 lbs" },
+                Feather: { name: "Pluma", weightKg: "31 kg", weightLbs: "68,3 lbs" },
+                Light: { name: "Leve", weightKg: "35 kg", weightLbs: "77,2 lbs" },
+                Middle: { name: "Médio", weightKg: "39 kg", weightLbs: "86 lbs" },
+                "Medium Heavy": { name: "Meio-Pesado", weightKg: "43 kg", weightLbs: "94,8 lbs" },
+                Heavy: { name: "Pesado", weightKg: "47 kg", weightLbs: "103,6 lbs" },
+                "Super Heavy": { name: "Super Pesado", weightKg: "> 47 kg", weightLbs: "> 103,6 lbs" },
+            },
+            'female-kids': {
+                Rooster: { name: "Galo", weightKg: "22 kg", weightLbs: "48,5 lbs" },
+                "Light Feather": { name: "Pluma Leve", weightKg: "26 kg", weightLbs: "57,3 lbs" },
+                Feather: { name: "Pluma", weightKg: "30 kg", weightLbs: "66,1 lbs" },
+                Light: { name: "Leve", weightKg: "34 kg", weightLbs: "74,9 lbs" },
+                Middle: { name: "Médio", weightKg: "38 kg", weightLbs: "83,8 lbs" },
+                "Medium Heavy": { name: "Meio-Pesado", weightKg: "42 kg", weightLbs: "92,6 lbs" },
+                Heavy: { name: "Pesado", weightKg: "46 kg", weightLbs: "101,4 lbs" },
+                "Super Heavy": { name: "Super Pesado", weightKg: "> 46 kg", weightLbs: "> 101,4 lbs" },
+            },
         },
     };
+
+    // Localized category options (move this to the top of the script section)
+    const categoryOptions = {
+      'en-us': [
+        { value: 'male-adult', label: 'MALE - ADULT' },
+        { value: 'female-adult', label: 'FEMALE - ADULT' },
+        { value: 'male-master', label: 'MALE - MASTER' },
+        { value: 'female-master', label: 'FEMALE - MASTER' },
+        { value: 'male-kids', label: 'MALE - KIDS' },
+        { value: 'female-kids', label: 'FEMALE - KIDS' },
+      ],
+      'pt-br': [
+        { value: 'male-adult', label: 'MASCULINO - ADULTO' },
+        { value: 'female-adult', label: 'FEMININO - ADULTO' },
+        { value: 'male-master', label: 'MASCULINO - MASTER' },
+        { value: 'female-master', label: 'FEMININO - MASTER' },
+        { value: 'male-kids', label: 'MASCULINO - INFANTIL' },
+        { value: 'female-kids', label: 'FEMININO - INFANTIL' },
+      ]
+    };
+
+    // Add form translations
+    const formTranslations = {
+      'en-us': {
+        modalTitle: 'Enter Your Information',
+        name: 'Name *',
+        belt: 'Belt *',
+        selectBelt: 'Select belt',
+        age: 'Age *',
+        email: 'Email (optional, receive a summary if interested)',
+        cancel: 'Cancel',
+        save: 'Save',
+        belts: ['White', 'Blue', 'Purple', 'Brown', 'Black']
+      },
+      'pt-br': {
+        modalTitle: 'Insira suas informações',
+        name: 'Nome *',
+        belt: 'Faixa *',
+        selectBelt: 'Selecione a faixa',
+        age: 'Idade *',
+        email: 'Email (opcional, receba um resumo se desejar)',
+        cancel: 'Cancelar',
+        save: 'Salvar',
+        belts: ['Branca', 'Azul', 'Roxa', 'Marrom', 'Preta']
+      }
+    };
+
+    function localizeForm(lang) {
+      const t = formTranslations[lang];
+      document.getElementById('modal-title').textContent = t.modalTitle;
+      document.querySelector('label[for="user-name"]').textContent = t.name;
+      document.querySelector('label[for="user-belt"]').textContent = t.belt;
+      document.getElementById('user-belt').innerHTML = `<option value="">${t.selectBelt}</option>` + t.belts.map(b => `<option value="${b}">${b}</option>`).join('');
+      document.querySelector('label[for="user-age"]').textContent = t.age;
+      document.querySelector('label[for="user-email"]').textContent = t.email;
+      document.getElementById('modal-cancel-footer').textContent = t.cancel;
+      document.querySelector('#user-info-form button[type="submit"]').textContent = t.save;
+    }
 
     // --- User Info Modal Logic ---
     function showModal() {
@@ -208,12 +356,13 @@
 
     // --- Category Buttons as Cards ---
     const categoryButtonsContainer = document.getElementById("category-buttons-container");
-    let selectedGender = localStorage.getItem('gender') || 'male';
-    document.getElementById('gender-category-select').value = selectedGender;
+    let selectedCategory = localStorage.getItem('category') || 'male-adult';
+    document.getElementById('gender-category-select').value = selectedCategory;
     document.getElementById('gender-category-select').onchange = function() {
-        selectedGender = this.value;
-        localStorage.setItem('gender', selectedGender);
-        loadCategories(savedLang, selectedGender);
+        selectedCategory = this.value;
+        localStorage.setItem('category', selectedCategory);
+        loadCategories(savedLang, selectedCategory);
+        updateGenderDropdown();
     };
     function disableAllButtons() {
       const buttons = document.getElementsByClassName('category-button');
@@ -230,16 +379,16 @@
       });
     }
     function handleCategoryClick(category) {
-      modalWeightClass = translations[savedLang][selectedGender][category].name;
+      modalWeightClass = translations[savedLang][selectedCategory][category].name;
       showModal();
     }
-    function loadCategories(lang, gender) {
+    function loadCategories(lang, category) {
         categoryButtonsContainer.innerHTML = "";
-        const categories = Object.keys(translations[lang][gender]);
-        categories.forEach((category, idx) => {
-            const localizedData = translations[lang][gender][category];
+        const categories = Object.keys(translations[lang][category]);
+        categories.forEach((cat, idx) => {
+            const localizedData = translations[lang][category][cat];
             const col = document.createElement("div");
-            col.className = "col-6 col-md-4 col-lg-3 d-flex"; // 2 per row on xs/sm, 3 on md, 4 on lg+
+            col.className = "col-6 col-md-4 col-lg-3 d-flex";
             col.innerHTML = `
               <button class="card category-button border-0 shadow-sm flex-fill mb-2 p-0 bg-white text-dark" style="transition:box-shadow .2s;cursor:pointer;min-height:90px;" tabindex="0">
                 <div class="card-body text-center py-3 py-sm-4 px-2">
@@ -248,7 +397,7 @@
                 </div>
               </button>
             `;
-            col.querySelector('button').onclick = () => handleCategoryClick(category);
+            col.querySelector('button').onclick = () => handleCategoryClick(cat);
             categoryButtonsContainer.appendChild(col);
         });
         // Lock if user info exists
@@ -275,10 +424,23 @@
                 "Categorias de Peso CBJJ";
         }
         localStorage.setItem("theme", theme);
+        updateLanguageSelector();
+        localizeForm(localStorage.getItem('language') || 'en-us');
     }
     function setLanguage(lang) {
         localStorage.setItem("language", lang);
-        loadCategories(lang, selectedGender);
+        renderCategoryDropdown();
+        loadCategories(lang, selectedCategory);
+        localizeForm(lang);
+    }
+    function updateLanguageSelector() {
+      const lang = localStorage.getItem("language") || "en-us";
+      document.getElementById('lang-en').classList.toggle('active', lang === 'en-us');
+      document.getElementById('lang-pt').classList.toggle('active', lang === 'pt-br');
+      document.getElementById('lang-en').classList.toggle('border-primary', lang === 'en-us');
+      document.getElementById('lang-pt').classList.toggle('border-primary', lang === 'pt-br');
+      document.getElementById('lang-en').classList.toggle('fw-bold', lang === 'en-us');
+      document.getElementById('lang-pt').classList.toggle('fw-bold', lang === 'pt-br');
     }
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {
@@ -287,9 +449,40 @@
         setTheme("usa");
     }
     const savedLang = localStorage.getItem("language") || "en-us";
-    selectedGender = localStorage.getItem('gender') || 'male';
+    selectedCategory = localStorage.getItem('category') || 'male-adult';
     setLanguage(savedLang);
     renderUserInfo();
+
+    // Gender/category dropdown highlight
+    function updateGenderDropdown() {
+      const select = document.getElementById('gender-category-select');
+      for (let i = 0; i < select.options.length; i++) {
+        if (select.options[i].selected) {
+          select.options[i].classList.add('fw-bold', 'bg-primary', 'text-white');
+        } else {
+          select.options[i].classList.remove('fw-bold', 'bg-primary', 'text-white');
+        }
+      }
+    }
+    // Call after DOM loads
+    setTimeout(updateGenderDropdown, 100);
+
+    // Update dropdown rendering
+    function renderCategoryDropdown() {
+      const lang = localStorage.getItem('language') || 'en-us';
+      const select = document.getElementById('gender-category-select');
+      const current = localStorage.getItem('category') || 'male-adult';
+      select.innerHTML = '';
+      categoryOptions[lang].forEach(opt => {
+        const option = document.createElement('option');
+        option.value = opt.value;
+        option.textContent = opt.label;
+        if (opt.value === current) option.selected = true;
+        select.appendChild(option);
+      });
+    }
+    // Call after DOM loads and on language change
+    setTimeout(renderCategoryDropdown, 100);
 </script>
 </body>
 </html>
